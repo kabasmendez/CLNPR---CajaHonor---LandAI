@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudios de Títulos QUICK 3.0 - Mockups</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom styles for corporate blue */
+        :root {
+            --primary-blue: #2E5AAC;
+        }
+
+        .bg-primary-blue {
+            background-color: var(--primary-blue);
+        }
+        .text-primary-blue {
+            color: var(--primary-blue);
+        }
+        .border-primary-blue {
+            border-color: var(--primary-blue);
+        }
+        .hover\:bg-primary-blue:hover {
+            background-color: var(--primary-blue);
+        }
+
+        /* Century Gothic font */
+        body {
+            font-family: 'Century Gothic', sans-serif;
+        }
+
+        /* Hide specific screens by default */
+        .screen {
+            display: none;
+        }
+        .screen.active {
+            display: flex; /* Use flex for layout */
+        }
+
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-blue);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #254988;
+        }
+
+        /* Styling for the timeline */
+        .timeline {
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: #e0e0e0;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline-content {
+            background-color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 45%;
+            text-align: center;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 55%; /* Push to right of line */
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: 55%; /* Push to left of line */
+        }
+
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            background-color: var(--primary-blue);
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            box-shadow: 0 0 0 3px white, 0 0 0 6px var(--primary-blue);
+        }
+
+        .timeline-item.active .timeline-dot {
+            background-color: #4CAF50; /* Green for active/completed */
+            box-shadow: 0 0 0 3px white, 0 0 0 6px #4CAF50;
+        }
+        .timeline-item.in-progress .timeline-dot {
+            background-color: #FFC107; /* Yellow for in progress */
+            box-shadow: 0 0 0 3px white, 0 0 0 6px #FFC107;
+        }
+
+        /* For the rich text editor simulation */
+        .rich-text-editor {
+            min-height: 400px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 1rem;
+            resize: vertical;
+            overflow-y: auto;
+            background-color: white;
+        }
+
+        /* For file input */
+        .file-input-label {
+            cursor: pointer;
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-blue);
+            color: white;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s;
+        }
+        .file-input-label:hover {
+            background-color: #254988;
+        }
+        .file-input {
+            display: none;
+        }
+        .text-field-with-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .text-field-with-button input {
+            flex-grow: 1;
+        }
+
+        /* Table row selection style */
+        .case-row.selected {
+            background-color: #e0f2fe; /* Light blue background for selected row */
+            border: 2px solid var(--primary-blue);
+        }
+
+        .filter-input {
+            border: 1px solid #e2e8f0;
+            border-radius: 0.375rem;
+            padding: 0.25rem 0.5rem;
+            width: 100%;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+        .filter-select {
+            border: 1px solid #e2e8f0;
+            border-radius: 0.375rem;
+            padding: 0.25rem 0.5rem;
+            width: 100%;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+
+        /* Style for disabled module buttons */
+        .module-button:disabled {
+            pointer-events: none;
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+    <!-- Login Screen -->
+    <div id="login-screen" class="screen active flex-col items-center justify-center p-4 min-h-screen">
+        <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+            <h1 class="text-3xl font-bold text-center mb-6 text-primary-blue">Estudios de Títulos</h1>
+            <div class="flex justify-center items-center gap-4 mb-8">
+                <img src="https://placehold.co/100x50/2E5AAC/FFFFFF?text=Lonja+Nacional" alt="Logo Lonja Nacional" class="h-12 object-contain rounded-md">
+                <img src="https://placehold.co/100x50/2E5AAC/FFFFFF?text=Cajahonor" alt="Logo Cajahonor" class="h-12 object-contain rounded-md">
+            </div>
+            <form id="login-form">
+                <div class="mb-4">
+                    <label for="username" class="block text-gray-700 text-sm font-semibold mb-2">Usuario</label>
+                    <input type="text" id="username" name="username" class="shadow-sm appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-primary-blue focus:border-transparent" placeholder="Ingrese su usuario">
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="block text-gray-700 text-sm font-semibold mb-2">Contraseña</label>
+                    <input type="password" id="password" name="password" class="shadow-sm appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-primary-blue focus:border-transparent" placeholder="Ingrese su contraseña">
+                    <p id="login-error" class="text-red-500 text-xs italic mt-2 hidden">Usuario o contraseña incorrectos.</p>
+                </div>
+                <div class="flex items-center justify-between mb-6">
+                    <label class="flex items-center text-gray-700 text-sm">
+                        <input type="checkbox" class="form-checkbox h-4 w-4 text-primary-blue rounded-sm focus:ring-primary-blue mr-2">
+                        Recordarme
+                    </label>
+                    <a href="#" class="inline-block align-baseline font-bold text-sm text-primary-blue hover:text-blue-800">¿Olvidó su contraseña?</a>
+                </div>
+                <button type="submit" class="bg-primary-blue hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-lg w-full transition duration-300 ease-in-out shadow-md">
+                    Iniciar Sesión
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard Principal (Lista de Casos) -->
+    <div id="dashboard-screen" class="screen flex-col w-full min-h-screen">
+        <!-- Main Content -->
+        <main class="flex-1 p-6 flex flex-col overflow-auto">
+            <!-- Header -->
+            <header class="flex items-center justify-between bg-white p-4 rounded-xl shadow-md mb-6">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-primary-blue mr-3">QUICK</span>
+                    <span class="text-xl font-semibold text-gray-700">Lonja Nacional de Propiedad Raíz</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="text-gray-600 hover:text-primary-blue transition duration-200">
+                        <i class="fas fa-cogs text-xl"></i>
+                        <span class="ml-2 text-sm hidden sm:inline">Administración</span>
+                    </a>
+                    <span class="text-gray-800 font-semibold flex items-center">
+                        <i class="fas fa-user-circle text-xl mr-2"></i> JUAN
+                    </span>
+                    <button id="logout-button" class="text-gray-600 hover:text-primary-blue transition duration-200">
+                        <i class="fas fa-sign-out-alt text-xl"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Module Buttons -->
+            <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+                <button class="bg-white p-4 rounded-xl shadow-md flex flex-col items-center justify-center hover:shadow-lg transition duration-200 module-button" data-target-screen="create-case-screen">
+                    <i class="fas fa-plus-circle text-3xl text-primary-blue mb-2"></i>
+                    <span class="text-sm font-semibold text-gray-700 text-center">Crear Caso</span>
+                </button>
+                <button class="bg-white p-4 rounded-xl shadow-md flex flex-col items-center justify-center hover:shadow-lg transition duration-200 module-button" data-target-screen="load-documents-screen">
+                    <i class="fas fa-file-upload text-3xl text-primary-blue mb-2"></i>
+                    <span class="text-sm font-semibold text-gray-700 text-center">Cargar Documentos</span>
+                </button>
+                <button class="bg-white p-4 rounded-xl shadow-md flex flex-col items-center justify-center hover:shadow-lg transition duration-200 module-button" data-target-screen="workspace-screen">
+                    <i class="fas fa-book-open text-3xl text-primary-blue mb-2"></i>
+                    <span class="text-sm font-semibold text-gray-700 text-center">Estudio de Títulos</span>
+                </button>
+                <button class="bg-white p-4 rounded-xl shadow-md flex flex-col items-center justify-center hover:shadow-lg transition duration-200 module-button" data-target-screen="review-study-screen">
+                    <i class="fas fa-search-plus text-3xl text-primary-blue mb-2"></i>
+                    <span class="text-sm font-semibold text-gray-700 text-center">Revisar Estudio</span>
+                </button>
+                <button class="bg-white p-4 rounded-xl shadow-md flex flex-col items-center justify-center hover:shadow-lg transition duration-200 module-button" data-target-screen="approve-study-screen">
+                    <i class="fas fa-check-circle text-3xl text-primary-blue mb-2"></i>
+                    <span class="text-sm font-semibold text-gray-700 text-center">Aprobar Estudio</span>
+                </button>
+                <button class="bg-white p-4 rounded-xl shadow-md flex flex-col items-center justify-center hover:shadow-lg transition duration-200 module-button" data-target-screen="send-to-cajahonor-screen">
+                    <i class="fas fa-paper-plane text-3xl text-primary-blue mb-2"></i>
+                    <span class="text-sm font-semibold text-gray-700 text-center">Enviar Estudios</span>
+                </button>
+            </section>
+
+            <!-- Table of Cases -->
+            <section class="bg-white p-6 rounded-xl shadow-md flex-1 overflow-hidden">
+                <div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
+                    <h2 class="text-xl font-semibold text-gray-800">Lista de Casos</h2>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider rounded-tl-lg">Id Caso</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha Creación</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo Informe</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cliente</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Municipio</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Departamento</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Días Ciclo</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider rounded-tr-lg">Semáforo</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                            </tr>
+                            <!-- Filter Row -->
+                            <tr>
+                                <th class="px-6 py-3">
+                                    <input type="text" class="filter-input" placeholder="Filtrar ID" data-filter-column="0">
+                                </th>
+                                <th class="px-6 py-3">
+                                    <input type="date" class="filter-input" data-filter-column="1">
+                                </th>
+                                <th class="px-6 py-3">
+                                    <select class="filter-select" data-filter-column="2">
+                                        <option value="">Todos</option>
+                                        <option value="Estudio de Títulos">Estudio de Títulos</option>
+                                        <option value="Otro Tipo">Otro Tipo</option>
+                                    </select>
+                                </th>
+                                <th class="px-6 py-3">
+                                    <input type="text" class="filter-input" placeholder="Filtrar Cliente" data-filter-column="3">
+                                </th>
+                                <th class="px-6 py-3">
+                                    <input type="text" class="filter-input" placeholder="Filtrar Municipio" data-filter-column="4">
+                                </th>
+                                <th class="px-6 py-3">
+                                    <select class="filter-select" data-filter-column="5">
+                                        <option value="">Todos</option>
+                                        <option value="Caquetá">Caquetá</option>
+                                        <option value="Casanare">Casanare</option>
+                                        <option value="Cundinamarca">Cundinamarca</option>
+                                        <option value="Meta">Meta</option>
+                                        <option value="Tolima">Tolima</option>
+                                        <option value="Valle del Cauca">Valle del Cauca</option>
+                                        <option value="Vichada">Vichada</option>
+                                        <option value="Chocó">Chocó</option>
+                                        <option value="Boyacá">Boyacá</option>
+                                    </select>
+                                </th>
+                                <th class="px-6 py-3">
+                                    <select class="filter-select" data-filter-column="6">
+                                        <option value="">Todos</option>
+                                        <option value="Documentos">Documentos</option>
+                                        <option value="Montaje">Montaje</option>
+                                        <option value="Revisado">Revisado</option>
+                                        <option value="Aprobado">Aprobado</option>
+                                        <option value="Enviado">Enviado</option>
+                                    </select>
+                                </th>
+                                <th class="px-6 py-3">
+                                    <input type="number" class="filter-input" placeholder="Días" data-filter-column="7">
+                                </th>
+                                <th class="px-6 py-3">
+                                    <!-- Semaphore filtering might be more complex, leave as text input for now or omit -->
+                                    <select class="filter-select" data-filter-column="8">
+                                        <option value="">Todos</option>
+                                        <option value="🟢">🟢</option>
+                                        <option value="🟡">🟡</option>
+                                        <option value="🔴">🔴</option>
+                                    </select>
+                                </th>
+                                <th class="px-6 py-3"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200" id="cases-table-body">
+                            <!-- Data from image_e3d03d.png, with semaphore adjustments -->
+                            <tr class="case-row" data-case-id="ET-001" tabindex="0">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">ET-001</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">20/06/2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Estudio de Títulos</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Valentina Chávez</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Puerto Rico</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Caquetá</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                        🟦 Documentos
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">1</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <span class="text-green-500 text-2xl">🟢</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <button class="text-primary-blue hover:text-blue-800 transition duration-200 view-detail-button" data-case-id="ET-001">Ver Detalle</button>
+                                </td>
+                            </tr>
+                            <tr class="case-row" data-case-id="ET-002" tabindex="0">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">ET-002</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">19/06/2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Estudio de Títulos</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Sebastián Paternina</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Aguazul</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Casanare</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                        🟦 Documentos
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <span class="text-green-500 text-2xl">🟢</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <button class="text-primary-blue hover:text-blue-800 transition duration-200 view-detail-button" data-case-id="ET-002">Ver Detalle</button>
+                                </td>
+                            </tr>
+                            <tr class="case-row" data-case-id="ET-003" tabindex="0">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">ET-003</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">18/06/2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Estudio de Títulos</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Camila Uribe</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Ricaurte</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Cundinamarca</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                        🟨 Montaje
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">3</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <span class="text-green-500 text-2xl">🟢</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <button class="text-primary-blue hover:text-blue-800 transition duration-200 view-detail-button" data-case-id="ET-003">Ver Detalle</button>
+                                </td>
+                            </tr>
+                            <tr class="case-row" data-case-id="ET-004" tabindex="0">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">ET-004</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">17/06/2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Estudio de Títulos</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Andrés Riascos</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Puerto Lopez</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Meta</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                        🟨 Montaje
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">4</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <span class="text-yellow-500 text-2xl">🟡</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <button class="text-primary-blue hover:text-blue-800 transition duration-200 view-detail-button" data-case-id="ET-004">Ver Detalle</button>
+                                </td>
+                            </tr>
+                            <tr class="case-row" data-case-id="ET-005" tabindex="0">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">ET-005</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">16/06/2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Estudio de Títulos</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Isabela Londoño</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Espinal</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Tolima</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                        🟦 Documentos
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">5</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <span class="text-yellow-500 text-2xl">🟡</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <button class="text-primary-blue hover:text-blue-800 transition duration-200 view-detail-button" data-case-id="ET-005">Ver Detalle</button>
+                                </td>
+                            </tr>
+                            <tr class="case-row" data-case-id="ET-006" tabindex="0">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">ET-006</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">13/06/2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Estudio de Títulos</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Juan Camilo De La Hoz</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Casablanca</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Tolima</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
+                                        🟧 Revisado
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">6</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <span class="text-red-500 text-2xl">🔴</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <button class="text-primary-blue hover:text-blue-800 transition duration-200 view-detail-button" data-case-id="ET-006">Ver Detalle</button>
+                                </td>
+                            </tr>
+                            <tr class="case-row" data-case-id="ET-007" tabindex="0">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">ET-007</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">12/06/2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Estudio de Títulos</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">María José Vergara</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">La Cumbre</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Valle del Cauca</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        🟩 Aprobado
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">7</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <span class="text-red-500 text-2xl">🔴</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <button class="text-primary-blue hover:text-blue-800 transition duration-200 view-detail-button" data-case-id="ET-007">Ver Detalle</button>
+                                </td>
+                            </tr>
+                            <tr class="case-row" data-case-id="ET-008" tabindex="0">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">ET-008</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">11/06/2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Estudio de Títulos</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Carlos Andrés Molina</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Cumariba</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Vichada</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                                        🟪 Enviado
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">8</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <span class="text-green-500 text-2xl">🟢</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <button class="text-primary-blue hover:text-blue-800 transition duration-200 view-detail-button" data-case-id="ET-008">Ver Detalle</button>
+                                </td>
+                            </tr>
+                            <tr class="case-row" data-case-id="ET-009" tabindex="0">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">ET-009</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">10/06/2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Estudio de Títulos</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Daniela Ospina</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Acandí</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Chocó</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                                        🟪 Enviado
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">9</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <span class="text-green-500 text-2xl">🟢</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <button class="text-primary-blue hover:text-blue-800 transition duration-200 view-detail-button" data-case-id="ET-009">Ver Detalle</button>
+                                </td>
+                            </tr>
+                            <tr class="case-row" data-case-id="ET-010" tabindex="0">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">ET-010</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">09/06/2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Estudio de Títulos</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Miguel Ángel Gómez</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Nobsa</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Boyacá</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                                        🟪 Enviado
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">10</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <span class="text-green-500 text-2xl">🟢</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <button class="text-primary-blue hover:text-blue-800 transition duration-200 view-detail-button" data-case-id="ET-010">Ver Detalle</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-between items-center mt-6 gap-4">
+                    <div class="flex items-center space-x-2">
+                        <button class="bg-primary-blue hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-lg flex items-center transition duration-300 shadow-md module-button" data-target-screen="create-case-screen">
+                            <i class="fas fa-plus mr-2"></i> Nuevo Caso
+                        </button>
+                        <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg flex items-center transition duration-300 shadow-md">
+                            <i class="fas fa-file-excel mr-2"></i> Exportar Excel
+                        </button>
+                    </div>
+                    <!-- Pagination -->
+                    <nav class="flex items-center space-x-1" aria-label="Pagination">
+                        <a href="#" class="relative inline-flex items-center px-3 py-2 rounded-lg border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                            <span class="sr-only">Previous</span>
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                        <a href="#" class="bg-primary-blue text-white relative inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium">1</a>
+                        <a href="#" class="relative inline-flex items-center px-4 py-2 rounded-lg border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">2</a>
+                        <a href="#" class="relative inline-flex items-center px-4 py-2 rounded-lg border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">3</a>
+                        <a href="#" class="relative inline-flex items-center px-3 py-2 rounded-lg border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                            <span class="sr-only">Next</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </nav>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Detalle de Caso (Bitácora) - COMBINED SCREEN -->
+    <div id="detail-case-screen" class="screen flex-col w-full min-h-screen">
+        <!-- Main Content -->
+        <main class="flex-1 p-6 flex flex-col overflow-auto">
+            <!-- Header (same as dashboard) -->
+            <header class="flex items-center justify-between bg-white p-4 rounded-xl shadow-md mb-6">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-primary-blue mr-3">QUICK</span>
+                    <span class="text-xl font-semibold text-gray-700">Lonja Nacional de Propiedad Raíz</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="text-gray-600 hover:text-primary-blue transition duration-200">
+                        <i class="fas fa-cogs text-xl"></i>
+                        <span class="ml-2 text-sm hidden sm:inline">Administración</span>
+                    </a>
+                    <span class="text-gray-800 font-semibold flex items-center">
+                        <i class="fas fa-user-circle text-xl mr-2"></i> JUAN
+                    </span>
+                    <button id="logout-button-detail" class="text-gray-600 hover:text-primary-blue transition duration-200">
+                        <i class="fas fa-sign-out-alt text-xl"></i>
+                    </button>
+                </div>
+            </header>
+
+            <section class="bg-white p-6 rounded-xl shadow-md flex-1">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Detalle del Caso: <span id="detail-case-id">ET-001</span></h2>
+
+                <!-- Combined Bitácora, Información, y Documentos -->
+                <div id="combined-detail-content">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-4">Cronología del Proceso</h3>
+                    <div class="timeline flex flex-col items-center">
+                        <div class="timeline-item active">
+                            <div class="timeline-dot"><i class="fas fa-check"></i></div>
+                            <div class="timeline-content">
+                                <p class="font-bold">Creación</p>
+                                <p class="text-sm text-gray-600">20/06/2025</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item in-progress">
+                            <div class="timeline-dot"><i class="fas fa-spinner fa-spin"></i></div>
+                            <div class="timeline-content">
+                                <p class="font-bold">Carga Docs</p>
+                                <p class="text-sm text-gray-600">21/06/2025</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <p class="font-bold">Elaboración</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <p class="font-bold">Revisión</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <p class="font-bold">Aprobación</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <p class="font-bold">Envío</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="text-xl font-semibold text-gray-700 mt-8 mb-4">Bitácora de Seguimiento</h3>
+                    <div class="overflow-x-auto mb-6">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider rounded-tl-lg">Fecha</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fase</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Responsable</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado (Semáforo)</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider rounded-tr-lg">Días en Fase</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">20/06/2025</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Creación</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Ana Pérez</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            🟢 Completo
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">1</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">21/06/2025</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Carga Docs</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Carlos Rodríguez</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                            🟡 En progreso
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">22/06/2025</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Elaboración</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">María López</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                            🔴 Retrasado
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">3</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3 class="text-xl font-semibold text-gray-700 mt-8 mb-4">Gráfico de Riesgo por Fase</h3>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-8">
+                        <!-- Simple bar chart simulation -->
+                        <div class="flex flex-col space-y-4">
+                            <div class="flex items-center">
+                                <span class="w-32 text-sm text-gray-700">Creación:</span>
+                                <div class="flex-1 bg-green-500 h-6 rounded-full" style="width: 90%;"></div>
+                                <span class="ml-2 text-sm">🟢</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-32 text-sm text-gray-700">Carga Docs:</span>
+                                <div class="flex-1 bg-yellow-500 h-6 rounded-full" style="width: 70%;"></div>
+                                <span class="ml-2 text-sm">🟡</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-32 text-sm text-gray-700">Elaboración:</span>
+                                <div class="flex-1 bg-red-500 h-6 rounded-full" style="width: 40%;"></div>
+                                <span class="ml-2 text-sm">🔴</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-32 text-sm text-gray-700">Revisión:</span>
+                                <div class="flex-1 bg-gray-300 h-6 rounded-full" style="width: 0%;"></div>
+                                <span class="ml-2 text-sm">⚪</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Información del Caso - Moved from info-tab -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-gray-700 mb-4">Datos del Cliente</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                            <div>
+                                <label class="block text-gray-700 text-sm font-semibold mb-2">Nombre Cliente:</label>
+                                <p class="text-gray-900">Cliente A S.A.S</p>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 text-sm font-semibold mb-2">Contacto:</label>
+                                <p class="text-gray-900">Juan Pérez (juan.perez@clienteA.com)</p>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 text-sm font-semibold mb-2">Identificación:</label>
+                                <p class="text-gray-900">900.123.456-7</p>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-semibold text-gray-700 mb-4">Detalles del Inmueble</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-gray-700 text-sm font-semibold mb-2">Departamento:</label>
+                                <p class="text-gray-900">Cundinamarca</p>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 text-sm font-semibold mb-2">Municipio:</label>
+                                <p class="text-gray-900">Bogotá D.C.</p>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 text-sm font-semibold mb-2">Matrícula Inmobiliaria:</label>
+                                <p class="text-gray-900">050-1234567</p>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 text-sm font-semibold mb-2">Dirección:</label>
+                                <p class="text-gray-900">Calle 123 # 45 - 67, Apartamento 801</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Documentos Cargados - Moved from docs-tab -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-gray-700 mb-4">Documentos Cargados</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between bg-gray-50 p-4 rounded-lg shadow-sm">
+                                <div class="flex items-center">
+                                    <i class="fas fa-file-pdf text-red-500 text-2xl mr-3"></i>
+                                    <div>
+                                        <p class="font-semibold text-gray-800">Certificado de Tradición y Libertad_ET001.pdf</p>
+                                        <p class="text-sm text-gray-600">Cargado el: 2025-06-20</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 mr-3">
+                                        ✅ Validado (Notaría 17)
+                                    </span>
+                                    <button class="text-primary-blue hover:text-blue-800 text-sm mr-2">Ver</button>
+                                    <button class="text-gray-500 hover:text-gray-700 text-sm">Historial</button>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between bg-gray-50 p-4 rounded-lg shadow-sm">
+                                <div class="flex items-center">
+                                    <i class="fas fa-file-alt text-blue-500 text-2xl mr-3"></i>
+                                    <div>
+                                        <p class="font-semibold text-gray-800">Escritura Pública 1234_ET001.pdf</p>
+                                        <p class="text-sm text-gray-600">Cargado el: 2025-06-21</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 mr-3">
+                                        ⚠️ Pendiente Validación (Notaría 17)
+                                    </span>
+                                    <button class="text-primary-blue hover:text-blue-800 text-sm mr-2">Ver</button>
+                                    <button class="text-gray-500 hover:text-gray-700 text-sm">Historial</button>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between bg-gray-50 p-4 rounded-lg shadow-sm">
+                                <div class="flex items-center">
+                                    <i class="fas fa-file-image text-purple-500 text-2xl mr-3"></i>
+                                    <div>
+                                        <p class="font-semibold text-gray-800">Cédula Propietario_ET001.jpg</p>
+                                        <p class="text-sm text-gray-600">Cargado el: 2025-06-21</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 mr-3">
+                                        ❌ Error de Validación (Notaría 17)
+                                    </span>
+                                    <button class="text-primary-blue hover:text-blue-800 text-sm mr-2">Ver</button>
+                                    <button class="text-gray-500 hover:text-gray-700 text-sm">Historial</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-4 mt-6">
+                    <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-6 rounded-lg transition duration-300 shadow-md" data-target-screen="dashboard-screen">
+                        Volver al Dashboard
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Módulo de Creación de Caso -->
+    <div id="create-case-screen" class="screen flex-col w-full min-h-screen">
+        <!-- Main Content -->
+        <main class="flex-1 p-6 flex flex-col overflow-auto">
+            <!-- Header (same as dashboard) -->
+            <header class="flex items-center justify-between bg-white p-4 rounded-xl shadow-md mb-6">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-primary-blue mr-3">QUICK</span>
+                    <span class="text-xl font-semibold text-gray-700">Lonja Nacional de Propiedad Raíz</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="text-gray-600 hover:text-primary-blue transition duration-200">
+                        <i class="fas fa-cogs text-xl"></i>
+                        <span class="ml-2 text-sm hidden sm:inline">Administración</span>
+                    </a>
+                    <span class="text-gray-800 font-semibold flex items-center">
+                        <i class="fas fa-user-circle text-xl mr-2"></i> JUAN
+                    </span>
+                    <button id="logout-button-create" class="text-gray-600 hover:text-primary-blue transition duration-200">
+                        <i class="fas fa-sign-out-alt text-xl"></i>
+                    </button>
+                </div>
+            </header>
+
+            <section class="bg-white p-6 rounded-xl shadow-md flex-1">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Crear Nuevo Caso</h2>
+                <form>
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-gray-700 mb-4">Información del Cliente</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="client-name" class="block text-gray-700 text-sm font-semibold mb-2">Nombre Cliente <span class="text-red-500">*</span></label>
+                                <input type="text" id="client-name" class="shadow-sm border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-primary-blue" placeholder="Nombre completo o razón social" required>
+                            </div>
+                            <div>
+                                <label for="client-id" class="block text-gray-700 text-sm font-semibold mb-2">Cédula/Identificación <span class="text-red-500">*</span></label>
+                                <input type="text" id="client-id" class="shadow-sm border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-primary-blue" placeholder="Número de identificación" required>
+                            </div>
+                            <div>
+                                <label for="client-phone" class="block text-gray-700 text-sm font-semibold mb-2">Teléfono</label>
+                                <input type="tel" id="client-phone" class="shadow-sm border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-primary-blue" placeholder="Número de teléfono">
+                            </div>
+                            <div>
+                                <label for="client-email" class="block text-gray-700 text-sm font-semibold mb-2">Email</label>
+                                <input type="email" id="client-email" class="shadow-sm border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-primary-blue" placeholder="Correo electrónico">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-gray-700 mb-4">Información del Inmueble</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="department" class="block text-gray-700 text-sm font-semibold mb-2">Departamento <span class="text-red-500">*</span></label>
+                                <select id="department" class="shadow-sm border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-primary-blue" required>
+                                    <option value="">Seleccione un departamento</option>
+                                    <option value="Cundinamarca">Cundinamarca</option>
+                                    <option value="Antioquia">Antioquia</option>
+                                    <option value="Valle del Cauca">Valle del Cauca</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="municipio" class="block text-gray-700 text-sm font-semibold mb-2">Municipio <span class="text-red-500">*</span></label>
+                                <select id="municipio" class="shadow-sm border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-primary-blue" required disabled>
+                                    <option value="">Seleccione un municipio</option>
+                                    <!-- Options will be populated dynamically based on department -->
+                                </select>
+                            </div>
+                            <div>
+                                <label for="address" class="block text-gray-700 text-sm font-semibold mb-2">Dirección <span class="text-red-500">*</span></label>
+                                <input type="text" id="address" class="shadow-sm border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-primary-blue" placeholder="Dirección del inmueble" required>
+                            </div>
+                            <div>
+                                <label for="cadastral" class="block text-gray-700 text-sm font-semibold mb-2">Matrícula Inmobiliaria</label>
+                                <input type="text" id="cadastral" class="shadow-sm border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-primary-blue" placeholder="Número de matrícula">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-gray-700 mb-4">Origen de Documentación</h3>
+                        <div class="flex items-center space-x-4 mb-4">
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="document-origin" value="cajahonor" id="origin-cajahonor" class="form-radio h-4 w-4 text-primary-blue" checked>
+                                <span class="ml-2 text-gray-700">Cajahonor carga documento</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="document-origin" value="lonja" id="origin-lonja" class="form-radio h-4 w-4 text-primary-blue">
+                                <span class="ml-2 text-gray-700">Lonja tramita con Notaría 17</span>
+                            </label>
+                        </div>
+
+                        <div id="cajahonor-upload-section">
+                            <h3 class="text-xl font-semibold text-gray-700 mb-4">Documentación Inicial (Cargada por Cajahonor)</h3>
+                            <div class="border border-dashed border-gray-300 rounded-lg p-6 text-center bg-gray-50 hover:bg-gray-100 transition duration-200">
+                                <label for="initial-docs" class="file-input-label">
+                                    <i class="fas fa-cloud-upload-alt text-4xl text-primary-blue mb-2"></i>
+                                    <p class="text-gray-700 font-semibold">Arrastre y suelte documentos aquí o haga click para cargar</p>
+                                    <p class="text-sm text-gray-500 mt-1">(Certificado de tradición, escrituras, etc.)</p>
+                                    <input type="file" id="initial-docs" class="file-input" multiple accept=".pdf,.doc,.docx,.jpg,.png">
+                                </label>
+                                <div id="uploaded-files-preview" class="mt-4 text-left">
+                                    <!-- Uploaded files will be listed here -->
+                                </div>
+                            </div>
+                            <div id="validate-notaria-option" class="mt-4 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                                <p class="text-yellow-800 text-sm font-semibold mb-2"><i class="fas fa-exclamation-triangle mr-2"></i> Documentos cargados por Cajahonor pueden requerir validación.</p>
+                                <button type="button" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 shadow-md">
+                                    <i class="fas fa-shield-alt mr-2"></i> Solicitar Validación a Notaría 17
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="lonja-notaria-section" class="hidden">
+                            <h3 class="text-xl font-semibold text-gray-700 mb-4">Documentación Tramitada por Lonja (con Notaría 17)</h3>
+                            <p class="text-gray-700">Los documentos tramitados directamente por Lonja en conjunto con Notaría 17 se consideran auténticos y no requieren validación adicional en este punto.</p>
+                            <div class="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                                <p class="text-blue-800 text-sm font-semibold"><i class="fas fa-info-circle mr-2"></i> Documentos como Certificado de Tradición y Escrituras serán gestionados directamente por Lonja con Notaría 17. No es necesario cargarlos aquí.</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="flex justify-end space-x-4">
+                        <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-6 rounded-lg transition duration-300 shadow-md" data-target-screen="dashboard-screen">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="bg-primary-blue hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg transition duration-300 shadow-md">
+                            Crear Caso
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <!-- Módulo Cargar Documentos -->
+    <div id="load-documents-screen" class="screen flex-col w-full min-h-screen">
+        <!-- Main Content -->
+        <main class="flex-1 p-6 flex flex-col overflow-auto">
+            <!-- Header (same as dashboard) -->
+            <header class="flex items-center justify-between bg-white p-4 rounded-xl shadow-md mb-6">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-primary-blue mr-3">QUICK</span>
+                    <span class="text-xl font-semibold text-gray-700">Lonja Nacional de Propiedad Raíz</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="text-gray-600 hover:text-primary-blue transition duration-200">
+                        <i class="fas fa-cogs text-xl"></i>
+                        <span class="ml-2 text-sm hidden sm:inline">Administración</span>
+                    </a>
+                    <span class="text-gray-800 font-semibold flex items-center">
+                        <i class="fas fa-user-circle text-xl mr-2"></i> JUAN
+                    </span>
+                    <button id="logout-button-load-docs" class="text-gray-600 hover:text-primary-blue transition duration-200">
+                        <i class="fas fa-sign-out-alt text-xl"></i>
+                    </button>
+                </div>
+            </header>
+
+            <section class="bg-white p-6 rounded-xl shadow-md flex-1">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Cargar Documentos para Caso: <span id="load-docs-case-id">N/A</span></h2>
+
+                <!-- Removed the "Seleccionar Caso" dropdown as per request -->
+
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-4">Documentos Predeterminados</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                        <div>
+                            <label for="certificado-tradicion-upload" class="block text-gray-700 text-sm font-semibold mb-2">Certificado de Tradición y Libertad</label>
+                            <input type="file" id="certificado-tradicion-upload" class="file-input" accept=".pdf">
+                            <label for="certificado-tradicion-upload" class="file-input-label inline-flex items-center">
+                                <i class="fas fa-cloud-upload-alt mr-2"></i> Cargar Certificado
+                            </label>
+                            <span id="certificado-tradicion-name" class="ml-2 text-gray-600 text-sm"></span>
+                        </div>
+                        <div>
+                            <label for="escritura-upload" class="block text-gray-700 text-sm font-semibold mb-2">Escritura</label>
+                            <input type="file" id="escritura-upload" class="file-input" accept=".pdf">
+                            <label for="escritura-upload" class="file-input-label inline-flex items-center">
+                                <i class="fas fa-cloud-upload-alt mr-2"></i> Cargar Escritura
+                            </label>
+                            <span id="escritura-name" class="ml-2 text-gray-600 text-sm"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-4">Otros Documentos</h3>
+                    <div id="other-documents-list" class="space-y-4 mb-4">
+                        <!-- Dynamic document fields will be added here -->
+                    </div>
+                    <button type="button" id="add-other-doc-button" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg flex items-center transition duration-200">
+                        <i class="fas fa-plus mr-2"></i> Añadir Otro Documento
+                    </button>
+                </div>
+
+                <div class="flex justify-end space-x-4">
+                    <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-6 rounded-lg transition duration-300 shadow-md" id="back-to-dashboard-load-docs">
+                        Volver al Dashboard
+                    </button>
+                    <button type="submit" class="bg-primary-blue hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg transition duration-300 shadow-md">
+                        Guardar Documentos
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Workspace de Estudio de Títulos -->
+    <div id="workspace-screen" class="screen flex-col w-full min-h-screen">
+        <!-- Main Content (2-column layout) -->
+        <main class="flex-1 p-6 flex flex-col overflow-hidden">
+            <!-- Header (same as dashboard) -->
+            <header class="flex items-center justify-between bg-white p-4 rounded-xl shadow-md m-4">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-primary-blue mr-3">QUICK</span>
+                    <span class="text-xl font-semibold text-gray-700">Lonja Nacional de Propiedad Raíz</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="text-gray-600 hover:text-primary-blue transition duration-200">
+                        <i class="fas fa-cogs text-xl"></i>
+                        <span class="ml-2 text-sm hidden sm:inline">Administración</span>
+                    </a>
+                    <span class="text-gray-800 font-semibold flex items-center">
+                        <i class="fas fa-user-circle text-xl mr-2"></i> JUAN
+                    </span>
+                    <button id="logout-button-workspace" class="text-gray-600 hover:text-primary-blue transition duration-200">
+                        <i class="fas fa-sign-out-alt text-xl"></i>
+                    </button>
+                </div>
+            </header>
+
+            <section class="flex flex-1 flex-col lg:flex-row p-4 gap-4 overflow-hidden">
+                <!-- Panel Derecho: Editor de Texto (Now first) -->
+                <div class="flex-1 bg-white p-4 rounded-xl shadow-md flex flex-col overflow-hidden">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Editor de Estudio de Títulos</h2>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg transition duration-200">
+                            <i class="fas fa-code-branch mr-2"></i> Insertar referencia
+                        </button>
+                        <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-200">
+                            <i class="fas fa-save mr-2"></i> Guardar revisión
+                        </button>
+                    </div>
+                    <div class="rich-text-editor flex-1 p-4 border border-gray-300 rounded-lg overflow-y-auto" contenteditable="true">
+                        <h3 class="text-lg font-semibold mb-2">Estudio de Títulos - Inmueble Calle 123 #45-67</h3>
+                        <p class="mb-2"><strong>Fecha:</strong> 21 de junio de 2025</p>
+                        <p class="mb-4"><strong>Elaborado por:</strong> [Nombre del Responsable]</p>
+
+                        <h4 class="font-bold mt-4 mb-2">I. OBJETO DEL ESTUDIO</h4>
+                        <p class="mb-4">El presente estudio tiene como objetivo determinar la situación jurídica del inmueble con Matrícula Inmobiliaria No. 050-1234567, ubicado en la [Dirección del inmueble], de propiedad de [Nombre del Propietario], con el fin de [Propósito del estudio, ej. un trámite de compraventa, hipoteca, etc.].</p>
+
+                        <h4 class="font-bold mt-4 mb-2">II. ANTECEDENTES REGISTRALES</h4>
+                        <p class="mb-2">Se ha consultado el Certificado de Tradición y Libertad No. [Número CTL], expedido por la Oficina de Instrumentos Públicos de [Municipio], con fecha [Fecha de Expedición CTL].</p>
+                        <p class="mb-4">De la revisión del certificado se extraen los siguientes actos jurídicos relevantes:</p>
+                        <ul class="list-disc list-inside ml-4 mb-4">
+                            <li>Anotación No. 1: Escritura Pública No. [Número Escritura] de [Fecha Escritura] de la Notaría [Número Notaría], de [Municipio], por la cual [Descripción del acto, ej. se constituyó hipoteca].</li>
+                            <li>Anotación No. 2: [Otra anotación relevante]</li>
+                        </ul>
+
+                        <h4 class="font-bold mt-4 mb-2">III. SITUACIÓN JURÍDICA ACTUAL</h4>
+                        <p class="mb-4">De acuerdo con los documentos revisados, el inmueble se encuentra [Libre de gravámenes, afectado por hipoteca, etc.]. Se observa [cualquier particularidad, ej. una servidumbre, un embargo, etc.].</p>
+
+                        <h4 class="font-bold mt-4 mb-2">IV. RECOMENDACIONES Y OBSERVACIONES</h4>
+                        <p class="mb-4">Se recomienda [acciones a seguir, ej. levantar gravámenes, solicitar documentos adicionales, etc.].</p>
+                        <p class="text-sm italic text-gray-600">[Esta es una plantilla editable. Inserte los datos específicos del caso. Utilice las herramientas de anotación del panel izquierdo para referenciar documentos.]</p>
+                    </div>
+                </div>
+
+                <!-- Panel Izquierdo: Visor de Documentos (Now second) -->
+                <div class="flex-1 bg-white p-4 rounded-xl shadow-md flex flex-col overflow-hidden">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Visor de Documentos (Caso: <span id="workspace-case-id">ET-001</span>)</h2>
+                    <div class="mb-4">
+                        <label for="document-select" class="block text-gray-700 text-sm font-semibold mb-2">Seleccionar Documento:</label>
+                        <select id="document-select" class="shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-primary-blue">
+                            <option value="doc1">Certificado de Tradición y Libertad</option>
+                            <option value="doc2">Escritura Pública 1234</option>
+                            <option value="doc3">Cédula Propietario</option>
+                            <option value="doc4">Otro Documento Anexo</option>
+                        </select>
+                    </div>
+                    <div class="border border-gray-300 rounded-lg flex-1 overflow-hidden flex items-center justify-center bg-gray-50">
+                        <!-- Placeholder for Document Viewer -->
+                        <p class="text-gray-500 text-lg"> [Image of PDF Document Viewer Placeholder] </p>
+                    </div>
+                    <div class="mt-4 flex items-center justify-center space-x-4">
+                        <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg transition duration-200">
+                            <i class="fas fa-search-plus mr-2"></i> Zoom In
+                        </button>
+                        <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg transition duration-200">
+                            <i class="fas fa-search-minus mr-2"></i> Zoom Out
+                        </button>
+                        <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg transition duration-200">
+                            <i class="fas fa-highlighter mr-2"></i> Resaltar
+                        </button>
+                        <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg transition duration-200">
+                            <i class="fas fa-sticky-note mr-2"></i> Añadir Nota
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <div class="flex justify-end space-x-4 mt-6">
+                <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-6 rounded-lg transition duration-300 shadow-md" data-target-screen="dashboard-screen">
+                    Volver al Dashboard
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Módulo de Revisión de Estudio -->
+    <div id="review-study-screen" class="screen flex-col w-full min-h-screen">
+        <!-- Main Content -->
+        <main class="flex-1 p-6 flex flex-col overflow-auto">
+            <!-- Header (same as dashboard) -->
+            <header class="flex items-center justify-between bg-white p-4 rounded-xl shadow-md mb-6">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-primary-blue mr-3">QUICK</span>
+                    <span class="text-xl font-semibold text-gray-700">Lonja Nacional de Propiedad Raíz</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="text-gray-600 hover:text-primary-blue transition duration-200">
+                        <i class="fas fa-cogs text-xl"></i>
+                        <span class="ml-2 text-sm hidden sm:inline">Administración</span>
+                    </a>
+                    <span class="text-gray-800 font-semibold flex items-center">
+                        <i class="fas fa-user-circle text-xl mr-2"></i> JUAN
+                    </span>
+                    <button id="logout-button-review" class="text-gray-600 hover:text-primary-blue transition duration-200">
+                        <i class="fas fa-sign-out-alt text-xl"></i>
+                    </button>
+                </div>
+            </header>
+
+            <section class="bg-white p-6 rounded-xl shadow-md flex-1">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Revisar Estudio de Títulos (Caso: <span id="review-case-id">ET-001</span>)</h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Vista Previa del Estudio -->
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 overflow-y-auto h-[600px] lg:h-auto">
+                        <h3 class="text-xl font-semibold text-gray-700 mb-4">Vista Previa del Estudio (Solo Lectura)</h3>
+                        <div class="prose max-w-none text-gray-800">
+                            <!-- Content copied from the workspace editor for preview -->
+                            <h3 class="text-lg font-semibold mb-2">Estudio de Títulos - Inmueble Calle 123 #45-67</h3>
+                            <p class="mb-2"><strong>Fecha:</strong> 21 de junio de 2025</p>
+                            <p class="mb-4"><strong>Elaborado por:</strong> [Nombre del Responsable]</p>
+
+                            <h4 class="font-bold mt-4 mb-2">I. OBJETO DEL ESTUDIO</h4>
+                            <p class="mb-4">El presente estudio tiene como objetivo determinar la situación jurídica del inmueble con Matrícula Inmobiliaria No. 050-1234567, ubicado en la [Dirección del inmueble], de propiedad de [Nombre del Propietario], con el fin de [Propósito del estudio, ej. un trámite de compraventa, hipoteca, etc.].</p>
+
+                            <h4 class="font-bold mt-4 mb-2">II. ANTECEDENTES REGISTRALES</h4>
+                            <p class="mb-2">Se ha consultado el Certificado de Tradición y Libertad No. [Número CTL], expedido por la Oficina de Instrumentos Públicos de [Municipio], con fecha [Fecha de Expedición CTL].</p>
+                            <p class="mb-4">De la revisión del certificado se extraen los siguientes actos jurídicos relevantes:</p>
+                            <ul class="list-disc list-inside ml-4 mb-4">
+                                <li>Anotación No. 1: Escritura Pública No. [Número Escritura] de [Fecha Escritura] de la Notaría [Número Notaría], de [Municipio], por la cual [Descripción del acto, ej. se constituyó hipoteca].</li>
+                                <li>Anotación No. 2: [Otra anotación relevante]</li>
+                            </ul>
+
+                            <h4 class="font-bold mt-4 mb-2">III. SITUACIÓN JURÍDICA ACTUAL</h4>
+                            <p class="mb-4">De acuerdo con los documentos revisados, el inmueble se encuentra [Libre de gravámenes, afectado por hipoteca, etc.]. Se observa [cualquier particularidad, ej. una servidumbre, un embargo, etc.].</p>
+
+                            <h4 class="font-bold mt-4 mb-2">IV. RECOMENDACIONES Y OBSERVACIONES</h4>
+                            <p class="mb-4">Se recomienda [acciones a seguir, ej. levantar gravámenes, solicitar documentos adicionales, etc.].</p>
+                            <p class="text-sm italic text-gray-600">[Contenido de ejemplo para la vista previa del estudio.]</p>
+                        </div>
+                    </div>
+
+                    <!-- Sección de Comentarios / Solicitudes de Cambio (Now second) -->
+                    <div id="review-mode-content">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-700 mb-4">Comentarios / Solicitudes de Cambio</h3>
+                            <textarea class="w-full h-48 p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-blue" placeholder="Escriba aquí sus comentarios o los cambios solicitados para revisión..."></textarea>
+                        </div>
+
+                        <div class="flex justify-end space-x-4 mt-4">
+                            <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 shadow-md">
+                                <i class="fas fa-times mr-2"></i> Rechazar
+                            </button>
+                            <button class="bg-primary-blue hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg transition duration-300 shadow-md">
+                                <i class="fas fa-pencil-alt mr-2"></i> Solicitar Cambios
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-4 mt-6">
+                    <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-6 rounded-lg transition duration-300 shadow-md" data-target-screen="dashboard-screen">
+                        Volver al Dashboard
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Módulo de Aprobación de Estudio -->
+    <div id="approve-study-screen" class="screen flex-col w-full min-h-screen">
+        <!-- Main Content -->
+        <main class="flex-1 p-6 flex flex-col overflow-auto">
+            <!-- Header (same as dashboard) -->
+            <header class="flex items-center justify-between bg-white p-4 rounded-xl shadow-md mb-6">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-primary-blue mr-3">QUICK</span>
+                    <span class="text-xl font-semibold text-gray-700">Lonja Nacional de Propiedad Raíz</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="text-gray-600 hover:text-primary-blue transition duration-200">
+                        <i class="fas fa-cogs text-xl"></i>
+                        <span class="ml-2 text-sm hidden sm:inline">Administración</span>
+                    </a>
+                    <span class="text-gray-800 font-semibold flex items-center">
+                        <i class="fas fa-user-circle text-xl mr-2"></i> JUAN
+                    </span>
+                    <button id="logout-button-approve" class="text-gray-600 hover:text-primary-blue transition duration-200">
+                        <i class="fas fa-sign-out-alt text-xl"></i>
+                    </button>
+                </div>
+            </header>
+
+            <section class="bg-white p-6 rounded-xl shadow-md flex-1">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Aprobar Estudio de Títulos (Caso: <span id="approve-case-id">ET-001</span>)</h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Vista Previa del Estudio -->
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 overflow-y-auto h-[600px] lg:h-auto">
+                        <h3 class="text-xl font-semibold text-gray-700 mb-4">Vista Previa del Estudio (Solo Lectura)</h3>
+                        <div class="prose max-w-none text-gray-800">
+                            <!-- Content copied from the workspace editor for preview -->
+                            <h3 class="text-lg font-semibold mb-2">Estudio de Títulos - Inmueble Calle 123 #45-67</h3>
+                            <p class="mb-2"><strong>Fecha:</strong> 21 de junio de 2025</p>
+                            <p class="mb-4"><strong>Elaborado por:</strong> [Nombre del Responsable]</p>
+
+                            <h4 class="font-bold mt-4 mb-2">I. OBJETO DEL ESTUDIO</h4>
+                            <p class="mb-4">El presente estudio tiene como objetivo determinar la situación jurídica del inmueble con Matrícula Inmobiliaria No. 050-1234567, ubicado en la [Dirección del inmueble], de propiedad de [Nombre del Propietario], con el fin de [Propósito del estudio, ej. un trámite de compraventa, hipoteca, etc.].</p>
+
+                            <h4 class="font-bold mt-4 mb-2">II. ANTECEDENTES REGISTRALES</h4>
+                            <p class="mb-2">Se ha consultado el Certificado de Tradición y Libertad No. [Número CTL], expedido por la Oficina de Instrumentos Públicos de [Municipio], con fecha [Fecha de Expedición CTL].</p>
+                            <p class="mb-4">De la revisión del certificado se extraen los siguientes actos jurídicos relevantes:</p>
+                            <ul class="list-disc list-inside ml-4 mb-4">
+                                <li>Anotación No. 1: Escritura Pública No. [Número Escritura] de [Fecha Escritura] de la Notaría [Número Notaría], de [Municipio], por la cual [Descripción del acto, ej. se constituyó hipoteca].</li>
+                                <li>Anotación No. 2: [Otra anotación relevante]</li>
+                            </ul>
+
+                            <h4 class="font-bold mt-4 mb-2">III. SITUACIÓN JURÍDICA ACTUAL</h4>
+                            <p class="mb-4">De acuerdo con los documentos revisados, el inmueble se encuentra [Libre de gravámenes, afectado por hipoteca, etc.]. Se observa [cualquier particularidad, ej. una servidumbre, un embargo, etc.].</p>
+
+                            <h4 class="font-bold mt-4 mb-2">IV. RECOMENDACIONES Y OBSERVACIONES</h4>
+                            <p class="mb-4">Se recomienda [acciones a seguir, ej. levantar gravámenes, solicitar documentos adicionales, etc.].</p>
+                            <p class="text-sm italic text-gray-600">[Contenido de ejemplo para la vista previa del estudio.]</p>
+                        </div>
+                    </div>
+
+                    <!-- Sección de Checklist de Aprobación (Now second) -->
+                    <div id="approve-mode-content">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-700 mb-4">Checklist de Requisitos para Aprobación</h3>
+                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 space-y-3">
+                                <label class="flex items-center text-gray-700">
+                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-primary-blue rounded-sm mr-2" checked>
+                                    Revisión completa de antecedentes registrales
+                                </label>
+                                <label class="flex items-center text-gray-700">
+                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-primary-blue rounded-sm mr-2" checked>
+                                    Análisis de gravámenes y limitaciones
+                                </label>
+                                <label class="flex items-center text-gray-700">
+                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-primary-blue rounded-sm mr-2" checked>
+                                    Documentos validados por Notaría 17 (si aplica)
+                                </label>
+                                <label class="flex items-center text-gray-700">
+                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-primary-blue rounded-sm mr-2">
+                                    Conclusiones claras y concisas
+                                </label>
+                                <label class="flex items-center text-gray-700">
+                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-primary-blue rounded-sm mr-2">
+                                    Recomendaciones pertinentes
+                                </label>
+                                <label class="flex items-center text-gray-700">
+                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-primary-blue rounded-sm mr-2">
+                                    Estudio completo y sin errores de formato
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end space-x-4 mt-4">
+                            <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 shadow-md">
+                                <i class="fas fa-check-circle mr-2"></i> Aprobar Estudio
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-4 mt-6">
+                    <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-6 rounded-lg transition duration-300 shadow-md" data-target-screen="dashboard-screen">
+                        Volver al Dashboard
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Módulo de Envío a Cajahonor -->
+    <div id="send-to-cajahonor-screen" class="screen flex-col w-full min-h-screen">
+        <!-- Main Content -->
+        <main class="flex-1 p-6 flex flex-col overflow-auto">
+            <!-- Header (same as dashboard) -->
+            <header class="flex items-center justify-between bg-white p-4 rounded-xl shadow-md mb-6">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-primary-blue mr-3">QUICK</span>
+                    <span class="text-xl font-semibold text-gray-700">Lonja Nacional de Propiedad Raíz</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="text-gray-600 hover:text-primary-blue transition duration-200">
+                        <i class="fas fa-cogs text-xl"></i>
+                        <span class="ml-2 text-sm hidden sm:inline">Administración</span>
+                    </a>
+                    <span class="text-gray-800 font-semibold flex items-center">
+                        <i class="fas fa-user-circle text-xl mr-2"></i> JUAN
+                    </span>
+                    <button id="logout-button-send" class="text-gray-600 hover:text-primary-blue transition duration-200">
+                        <i class="fas fa-sign-out-alt text-xl"></i>
+                    </button>
+                </div>
+            </header>
+
+            <section class="bg-white p-6 rounded-xl shadow-md flex-1">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Envío de Estudio de Títulos a Cajahonor (Caso: <span id="send-case-id">ET-001</span>)</h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Checklist de Verificación -->
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-4">Checklist de Verificación Pre-Envío</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 space-y-3">
+                            <label class="flex items-center text-gray-700">
+                                <input type="checkbox" class="form-checkbox h-5 w-5 text-primary-blue rounded-sm mr-2" checked>
+                                Estudio firmado digitalmente
+                            </label>
+                            <label class="flex items-center text-gray-700">
+                                <input type="checkbox" class="form-checkbox h-5 w-5 text-primary-blue rounded-sm mr-2" checked>
+                                Anexos completos y correctos
+                            </label>
+                            <label class="flex items-center text-gray-700">
+                                <input type="checkbox" class="form-checkbox h-5 w-5 text-primary-blue rounded-sm mr-2" checked>
+                                Validación Notaría 17 completa (si aplica)
+                            </label>
+                            <label class="flex items-center text-gray-700">
+                                <input type="checkbox" class="form-checkbox h-5 w-5 text-primary-blue rounded-sm mr-2">
+                                Informe final aprobado
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Preview de Email Automático -->
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-4">Vista Previa de Email Automático</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 space-y-3">
+                            <p class="text-gray-700"><strong class="w-24 inline-block">Para:</strong> Cajahonor &lt;notificaciones@cajahonor.com&gt;</p>
+                            <p class="text-700"><strong class="w-24 inline-block">Asunto:</strong> Estudio de Títulos Caso ET-001 - [Dirección del inmueble]</p>
+                            <div class="bg-white p-4 rounded-lg border border-gray-200 text-gray-800">
+                                <p class="mb-2">Estimados, </p>
+                                <p class="mb-2">Adjunto encontrarán el Estudio de Títulos correspondiente al Caso ET-001 para el inmueble ubicado en [Dirección del inmueble].</p>
+                                <p class="mb-2">Pueden consultar el estado y detalles del estudio en línea a través del siguiente enlace:</p>
+                                <p class="mb-2"><a id="online-consultation-link-preview" href="#" class="text-primary-blue hover:underline"></a></p>
+                                <p class="mb-2">El estudio incluye:</p>
+                                <ul class="list-disc list-inside ml-4">
+                                    <li>Estudio de Títulos firmado digitalmente (adjunto)</li>
+                                    <li>Certificado_Tradicion_ET001.pdf</li>
+                                    <li>Escritura_Publica_1234_ET001.pdf</li>
+                                    <li>Otros Anexos (adjuntos)</li>
+                                </ul>
+                                <p class="mt-4">Quedamos atentos a cualquier inquietud.</p>
+                                <p class="mt-2">Atentamente,</p>
+                                <p>Equipo Lonja Nacional de Propiedad Raíz</p>
+                            </div>
+                            <div class="mt-4">
+                                <h4 class="font-semibold text-gray-700 mb-2">Archivos Adjuntos:</h4>
+                                <ul class="list-disc list-inside ml-4 text-gray-600">
+                                    <li>Estudio_Titulos_ET001_Firmado.pdf</li>
+                                    <li>Certificado_Tradicion_ET001.pdf</li>
+                                    <li>Escritura_Publica_1234_ET001.pdf</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <label for="online-consultation-link" class="block text-gray-700 text-sm font-semibold mb-2">Enlace de Consulta Online:</label>
+                            <input type="url" id="online-consultation-link" class="shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-primary-blue" placeholder="https://quick.lonja.com/caso/ET-001">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center mt-8">
+                    <div id="send-status" class="text-lg font-semibold flex items-center">
+                        <!-- Status will appear here -->
+                    </div>
+                    <div class="flex space-x-4">
+                        <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-6 rounded-lg transition duration-300 shadow-md" id="back-to-dashboard-send">
+                            Cancelar
+                        </button>
+                        <button id="send-email-button" class="bg-primary-blue hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg transition duration-300 shadow-md">
+                            <i class="fas fa-paper-plane mr-2"></i> Enviar a Cajahonor
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const screens = document.querySelectorAll('.screen');
+            const moduleButtons = document.querySelectorAll('.module-button');
+            const detailTabButtons = document.querySelectorAll('.detail-tab-button'); // Keep for potential future use or old reference
+            const logoutButtons = document.querySelectorAll('[id^="logout-button"]');
+            const tableBody = document.getElementById('cases-table-body');
+            const filterInputs = document.querySelectorAll('.filter-input, .filter-select');
+            const addOtherDocButton = document.getElementById('add-other-doc-button');
+            const otherDocumentsList = document.getElementById('other-documents-list');
+
+            let selectedCaseId = null; // Global variable to store the selected case ID
+
+            // --- Screen Navigation Logic ---
+            function showScreen(id) {
+                screens.forEach(screen => {
+                    if (screen.id === id) {
+                        screen.classList.add('active');
+                    } else {
+                        screen.classList.remove('active');
+                    }
+                });
+                updateModuleAccess(); // Update module access rights after screen change
+            }
+
+            // Function to update module access based on selectedCaseId
+            function updateModuleAccess() {
+                const canAccessCaseModules = selectedCaseId !== null;
+
+                moduleButtons.forEach(button => {
+                    const targetScreen = button.dataset.targetScreen;
+                    // Always enable "Crear Caso" and "Nuevo Caso" button from dashboard
+                    if (targetScreen === 'create-case-screen') {
+                        button.disabled = false;
+                    } else if (canAccessCaseModules) {
+                        button.disabled = false;
+                    } else {
+                        button.disabled = true;
+                    }
+                });
+
+                // Update case IDs in headers
+                const caseIdElements = ['detail-case-id', 'load-docs-case-id', 'workspace-case-id', 'review-case-id', 'approve-case-id', 'send-case-id'];
+                caseIdElements.forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        element.textContent = selectedCaseId || 'N/A';
+                    }
+                });
+            }
+
+            // --- Table Filtering Logic ---
+            function filterTable() {
+                const rows = tableBody.querySelectorAll('tr');
+                const filters = {};
+
+                filterInputs.forEach(input => {
+                    const column = input.dataset.filterColumn;
+                    let value = input.value.toLowerCase().trim();
+
+                    // Special handling for semaphore filter to match the emoji
+                    if (column === '8') { // Assuming column 8 is Semaphore
+                        if (value === 'todos' || value === '') {
+                             filters[column] = ''; // No filter
+                        } else if (value.includes('verde') || value === '🟢') {
+                            filters[column] = '🟢';
+                        } else if (value.includes('amarillo') || value === '🟡') {
+                            filters[column] = '🟡';
+                        } else if (value.includes('rojo') || value === '🔴') {
+                            filters[column] = '🔴';
+                        } else {
+                             filters[column] = value; // Default to raw input
+                        }
+                    } else if (input.type === 'date') {
+                        // For date inputs, convert table date (DD/MM/YYYY) to YYYY-MM-DD for comparison
+                        filters[column] = value; // The filter value is already YYYY-MM-DD from the input
+                    }
+                    else if (input.tagName === 'SELECT' && value === '') {
+                        filters[column] = ''; // 'Todos' option clears the filter for that column
+                    }
+                    else {
+                        filters[column] = value;
+                    }
+                });
+
+                rows.forEach(row => {
+                    let rowVisible = true;
+                    const cells = row.querySelectorAll('td');
+
+                    for (const column in filters) {
+                        const filterValue = filters[column];
+                        if (filterValue === '') continue; // Skip empty filters
+
+                        let cellText = cells[column].textContent.toLowerCase().trim();
+
+                        // Specific handling for Date column (column 1)
+                        if (column === '1' && filters[column]) {
+                            // Convert table date from DD/MM/YYYY to YYYY-MM-DD for comparison
+                            const parts = cellText.split('/');
+                            if (parts.length === 3) {
+                                const formattedCellDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
+                                if (formattedCellDate !== filterValue) {
+                                    rowVisible = false;
+                                    break;
+                                }
+                            } else {
+                                // If date format is unexpected, hide the row or handle appropriately
+                                rowVisible = false;
+                                break;
+                            }
+                        }
+                        // Special handling for 'Estado' column to extract the text part
+                        else if (column === '6') { // Assuming column 6 is Estado
+                            const span = cells[column].querySelector('span');
+                            if (span) {
+                                // Extract text and remove the emoji and leading/trailing whitespace
+                                cellText = span.textContent.replace(/[\uD800-\uDFFF].\s*/g, '').toLowerCase().trim();
+                            }
+                            if (!cellText.includes(filterValue)) {
+                                rowVisible = false;
+                                break;
+                            }
+                        }
+                         // Special handling for 'Semáforo' column, directly use text content of span
+                        else if (column === '8') {
+                            const span = cells[column].querySelector('span');
+                            if (span) {
+                                cellText = span.textContent.toLowerCase().trim();
+                            }
+                            if (!cellText.includes(filterValue)) {
+                                rowVisible = false;
+                                break;
+                            }
+                        }
+                        else {
+                            if (!cellText.includes(filterValue)) {
+                                rowVisible = false;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (rowVisible) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            }
+
+
+            // --- Row Selection Logic ---
+            function setupRowSelection() {
+                const caseRows = tableBody.querySelectorAll('.case-row');
+                caseRows.forEach(row => {
+                    row.addEventListener('click', function() {
+                        // Remove 'selected' class from all rows
+                        caseRows.forEach(r => r.classList.remove('selected'));
+
+                        // Add 'selected' class to the clicked row
+                        this.classList.add('selected');
+
+                        // Update the global selectedCaseId
+                        selectedCaseId = this.dataset.caseId;
+                        updateModuleAccess(); // Enable modules based on selection
+                    });
+                });
+            }
+
+            // --- Attach event listeners for filters ---
+            filterInputs.forEach(input => {
+                input.addEventListener('input', filterTable);
+                input.addEventListener('change', filterTable); // For select and date inputs
+            });
+
+            // --- Module Button Click Handlers ---
+            moduleButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetScreenId = this.dataset.targetScreen;
+                    showScreen(targetScreenId);
+                });
+            });
+
+            // --- "Ver Detalle" Button in Dashboard Table ---
+            document.querySelectorAll('.view-detail-button').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Prevent row click event from firing as well
+                    selectedCaseId = this.dataset.caseId;
+                    showScreen('detail-case-screen');
+                });
+            });
+
+
+            // --- Login Form Submission ---
+            document.getElementById('login-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const usernameInput = document.getElementById('username');
+                const passwordInput = document.getElementById('password');
+                const errorMessage = document.getElementById('login-error');
+
+                const username = usernameInput.value.trim(); // Trim whitespace
+                const password = passwordInput.value.trim(); // Trim whitespace
+
+                // Simple validation for mockup
+                if (username === 'test' && password === 'test') {
+                    errorMessage.classList.add('hidden'); // Hide error message
+                    usernameInput.classList.remove('border-red-500');
+                    passwordInput.classList.remove('border-red-500');
+                    showScreen('dashboard-screen');
+                } else {
+                    errorMessage.classList.remove('hidden'); // Show error message
+                    usernameInput.classList.add('border-red-500');
+                    passwordInput.classList.add('border-red-500');
+                }
+            });
+
+
+            // --- Add event listeners for "Volver al Dashboard" buttons ---
+            // "Cancelar" button in "Crear Caso"
+            document.querySelector('#create-case-screen button[data-target-screen="dashboard-screen"]').addEventListener('click', function() {
+                showScreen('dashboard-screen');
+            });
+
+            // "Volver al Dashboard" button in "Cargar Documentos"
+            document.getElementById('back-to-dashboard-load-docs').addEventListener('click', function() {
+                showScreen('dashboard-screen');
+            });
+
+            // "Volver al Dashboard" button in "Revisar Estudio"
+            document.querySelector('#review-study-screen button[data-target-screen="dashboard-screen"]').addEventListener('click', function() {
+                showScreen('dashboard-screen');
+            });
+
+            // "Volver al Dashboard" button in "Aprobar Estudio"
+            document.querySelector('#approve-study-screen button[data-target-screen="dashboard-screen"]').addEventListener('click', function() {
+                showScreen('dashboard-screen');
+            });
+
+            // "Cancelar" button in "Enviar a Cajahonor"
+            document.getElementById('back-to-dashboard-send').addEventListener('click', function() {
+                showScreen('dashboard-screen');
+            });
+
+            // "Volver al Dashboard" button for "Detalle de Caso"
+            const backToDashboardDetail = document.querySelector('#detail-case-screen button[data-target-screen="dashboard-screen"]');
+            if (backToDashboardDetail) {
+                backToDashboardDetail.addEventListener('click', function() {
+                    showScreen('dashboard-screen');
+                });
+            }
+
+            // "Volver al Dashboard" button for "Workspace"
+            const backToDashboardWorkspace = document.querySelector('#workspace-screen button[data-target-screen="dashboard-screen"]');
+            if (backToDashboardWorkspace) {
+                backToDashboardWorkspace.addEventListener('click', function() {
+                    showScreen('dashboard-screen');
+                });
+            }
+
+            // --- Create Case Module: Document Origin Radio Buttons Logic ---
+            const originCajahonor = document.getElementById('origin-cajahonor');
+            const originLonja = document.getElementById('origin-lonja');
+            const cajahonorUploadSection = document.getElementById('cajahonor-upload-section');
+            const lonjaNotariaSection = document.getElementById('lonja-notaria-section');
+
+            function updateDocumentOriginSection() {
+                if (originCajahonor.checked) {
+                    cajahonorUploadSection.classList.remove('hidden');
+                    lonjaNotariaSection.classList.add('hidden');
+                } else if (originLonja.checked) {
+                    cajahonorUploadSection.classList.add('hidden');
+                    lonjaNotariaSection.classList.remove('hidden');
+                }
+            }
+
+            originCajahonor.addEventListener('change', updateDocumentOriginSection);
+            originLonja.addEventListener('change', updateDocumentOriginSection);
+            // Call on load to set initial state
+            updateDocumentOriginSection();
+
+            // --- Load Documents Module: Add Other Document Functionality ---
+            addOtherDocButton.addEventListener('click', function() {
+                const newDocDiv = document.createElement('div');
+                newDocDiv.classList.add('flex', 'items-center', 'gap-4', 'mb-4');
+                newDocDiv.innerHTML = `
+                    <div class="flex-1">
+                        <label class="block text-gray-700 text-sm font-semibold mb-2">Nombre del Documento:</label>
+                        <input type="text" class="shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-primary-blue" placeholder="Ej. Recibo de Impuesto">
+                    </div>
+                    <div>
+                        <label for="other-doc-upload-${Date.now()}" class="block text-gray-700 text-sm font-semibold mb-2">Cargar Archivo:</label>
+                        <input type="file" id="other-doc-upload-${Date.now()}" class="file-input" accept=".pdf,.doc,.docx,.jpg,.png">
+                        <label for="other-doc-upload-${Date.now()}" class="file-input-label inline-flex items-center">
+                            <i class="fas fa-cloud-upload-alt mr-2"></i> Cargar
+                        </label>
+                        <span class="ml-2 text-gray-600 text-sm file-name-display"></span>
+                    </div>
+                    <button type="button" class="remove-doc-button text-red-500 hover:text-red-700 px-2 py-1 rounded-full">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                `;
+                otherDocumentsList.appendChild(newDocDiv);
+
+                // Add event listener for file input to show file name
+                const newFileInput = newDocDiv.querySelector('input[type="file"]');
+                const fileNameDisplay = newDocDiv.querySelector('.file-name-display');
+                if (newFileInput && fileNameDisplay) {
+                    newFileInput.addEventListener('change', function() {
+                        fileNameDisplay.textContent = this.files.length > 0 ? this.files[0].name : '';
+                    });
+                }
+
+                // Add event listener for remove button
+                newDocDiv.querySelector('.remove-doc-button').addEventListener('click', function() {
+                    newDocDiv.remove();
+                });
+            });
+
+            // Initial screen setup and module access update
+            showScreen('login-screen');
+            updateModuleAccess(); // Call initially to set correct state
+            setupRowSelection(); // Initialize row selection listeners
+        });
+    </script>
+</body>
+</html>
